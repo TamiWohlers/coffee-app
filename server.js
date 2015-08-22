@@ -48,6 +48,17 @@ coffeeRoute.post(function(req, res) {
   });
 });
 
+// Create endpoint /api/coffee for GET
+coffeeRoute.get(function(req, res) {
+  // Use the Coffee model to find all coffee
+  Coffee.find(function(err, coffee) {
+    if (err)
+      res.send(err);
+
+    res.json(coffee);
+  });
+});
+
 // Connect to the coffee-app MongoDB
 mongoose.connect('mongodb://localhost:27017/coffee-app');
 
