@@ -2,6 +2,7 @@
 
 // Dependencies; get the packages we need
 var express = require('express');
+var mongoose = require('mongoose');
 
 // Initate our app
 var app = express();
