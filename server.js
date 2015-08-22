@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 
 
-// Create our Express router
+// Express router
 var router = express.Router();
 
 // Initial dummy route for testing
@@ -25,3 +25,4 @@ var port = process.env.PORT || 8000;
 
 app.listen(port);
 console.log('Listening to port ' + port);
+
