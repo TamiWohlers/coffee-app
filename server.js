@@ -73,6 +73,26 @@ coffeeRoute.get(function(req, res) {
   });
 });
 
+// Create endpoint /api/coffee/:coffee_id for PUT
+coffeeRoute.put(function(req, res) {
+  // Use the Coffee model to find a specific coffee
+  Coffee.findById(req.params.coffee_id, function(err, coffee) {
+    if (err)
+      res.send(err);
+
+    // Update the existing coffee quantity
+    coffee.quantity = req.body.quantity;
+
+    // Save the coffee and check for errors
+    coffee.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json(coffee);
+    });
+  });
+});
+
 // Connect to the coffee-app MongoDB
 mongoose.connect('mongodb://localhost:27017/coffee-app');
 
