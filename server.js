@@ -93,6 +93,17 @@ coffeeRoute.put(function(req, res) {
   });
 });
 
+// Create endpoint /api/coffee/:coffee_id for DELETE
+coffeeRoute.delete(function(req, res) {
+  // Use the Coffee model to find a specific coffee and remove it
+  Coffee.findByIdAndRemove(req.params.coffee_id, function(err) {
+    if (err)
+      res.send(err);
+
+    res.json({ message: 'Delete coffee from database' });
+  });
+});
+
 // Connect to the coffee-app MongoDB
 mongoose.connect('mongodb://localhost:27017/coffee-app');
 
