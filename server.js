@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 // Controllers
 var CoffeeCtrl = require("./controllers/CoffeeCtrl");
+var UserCtrl = require('./controllers/UserCtrl');
 
 // Initate our app
 var app = express();
@@ -20,6 +21,9 @@ var router = express.Router();
 // Register all our routes with /api
 app.use('/api', router);
 
+/********************************************
+ - START ENDPOINTS -
+********************************************/
 
 // Create endpoint handlers for /coffee
 router.route('/coffee')
@@ -31,6 +35,15 @@ router.route('/coffee/:coffee_id')
   .get(CoffeeCtrl.read)
   .put(CoffeeCtrl.update)
   .delete(CoffeeCtrl.remove);
+
+// Create endpoint handlers for /users
+router.route('/users')
+  .post(UserCtrl.create)
+  .get(UserCtrl.read);
+
+/********************************************
+ - END ENDPOINTS -
+********************************************/
 
 // Connect to the coffee-app MongoDB
 mongoose.connect('mongodb://localhost:27017/coffee-app');
