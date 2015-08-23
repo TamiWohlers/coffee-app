@@ -12,6 +12,7 @@ module.exports = {
 	  coffee.name = req.body.name;
 	  coffee.type = req.body.type;
 	  coffee.quantity = req.body.quantity;
+	  coffee.userId = req.user._id;
 
 	  // Save the coffee and check for errors
 	  coffee.save(function(err) {
@@ -25,7 +26,7 @@ module.exports = {
 	// Create endpoint /api/coffee for GET
 	read: function(req, res) {
 	  // Use the Coffee model to find all coffee
-	  Coffee.find(function(err, coffee) {
+	  Coffee.find({ userId: req.user._id }, function(err, coffee) {
 	    if (err)
 	      res.send(err);
 
@@ -36,7 +37,7 @@ module.exports = {
 	// Create endpoint /api/coffee/:coffee_id for GET
 	read: function(req, res) {
 	  // Use the Coffee model to find a specific coffee
-	  Coffee.findById(req.params.coffee_id, function(err, coffee) {
+	  Coffee.findById({ userId: req.user._id, _id: req.params.coffee_id}, function(err, coffee) {
 	    if (err)
 	      res.send(err);
 
@@ -47,7 +48,7 @@ module.exports = {
 	// Create endpoint /api/coffee/:coffee_id for PUT
 	update: function(req, res) {
 	  // Use the Coffee model to find a specific coffee
-	  Coffee.findById(req.params.coffee_id, function(err, coffee) {
+	  Coffee.findById({ userId: req.user._id, _id: req.params.coffee_id}, function(err, coffee) {
 	    if (err)
 	      res.send(err);
 
@@ -67,7 +68,7 @@ module.exports = {
 	// Create endpoint /api/coffee/:coffee_id for DELETE
 	remove: function(req, res) {
 	  // Use the Coffee model to find a specific coffee and remove it
-	  Coffee.findByIdAndRemove(req.params.coffee_id, function(err) {
+	  Coffee.findByIdAndRemove({ userId: req.user._id, _id: req.params.coffee_id}, function(err) {
 	    if (err)
 	      res.send(err);
 

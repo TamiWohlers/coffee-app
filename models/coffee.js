@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var CoffeeSchema = new mongoose.Schema({
   name: String,
   type: String,
-  quantity: Number
+  quantity: Number,
+  userId: String
 });
 
 // Export the Mongoose model
